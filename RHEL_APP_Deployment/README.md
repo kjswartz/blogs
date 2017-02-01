@@ -50,8 +50,6 @@ In order to lock a user who previously had login access
 $ passwd -l <user_name>
 ```
 
-[See Here for additional information and options](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/s1-users-tools.html)
-
 ## References
 - [chkconfig](http://linuxcommand.org/man_pages/chkconfig8.html) 
 

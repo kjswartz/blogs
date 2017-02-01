@@ -1,4 +1,5 @@
 # Database Server Setup
+([back to main](../))
 ## Table of Contents
 - [Postgresql](#postgresql)
 	- [Installation](#pg-installation)
@@ -37,7 +38,7 @@ $ service postgresql initdb
 $ chkconfig postgresql on
 ```
 
-[back to top](#table-of-contents)
+([back to top](#table-of-contents))
 
 ### User and Database Creation
 A user (`postgres`) is created by default during installation. The below command will log into user postgres. You're shell prompt should change to something like `-bash-4.2$` after connecting.
@@ -74,7 +75,7 @@ We'll want to allow the user we created earlier the ability to login:
 postgres=# ALTER ROLE <user> WITH LOGIN;
 ```
 
-[back to top](#table-of-contents)
+([back to top](#table-of-contents))
 
 ### PG Connectivity
 Since we are using two different servers to host our web code and database, we'll need to make sure we can access our database from our `webserver`. 
@@ -88,7 +89,7 @@ $ psql -h <host-ip> -p <port> -U <user> -W <database_name>
 You will then be prompted for the user password and if successful you'll prompt should change to the `database_name=>`. 
 You can use `\l` to list databases, `\dt` to see a list of the tables in your database and `\q` to quit.
 
-[back to top](#table-of-contents)
+([back to top](#table-of-contents))
 
 ## [Redis](https://redis.io/topics/quickstart)
 Redis will be utilized as our caching solution. A client connects to a Redis server creating a TCP connection to the port 6379. 
@@ -104,7 +105,7 @@ $ vim /etc/redis.conf
 ```
 Then you'll need to change the `bind 127.0.0.1` to `bind 0.0.0.0` in order to connect from outside server.
 
-[back to top](#table-of-contents)
+([back to top](#table-of-contents))
 
 ### Redis Commands
 You can use the service command to start, stop, and check the status of redis.
@@ -121,7 +122,7 @@ $ service redis stop
 $ service redis status
 ```
 
-[back to top](#table-of-contents)
+([back to top](#table-of-contents))
 
 ### Redis Connectivity 
 You will need to be able to access your server on port 6379. You can check to see if it is configured the below command. Then check to see if port 6379 is listed. 
@@ -139,5 +140,5 @@ If you are successful you should see something similiar to below. Then you can j
 Ncat: Connected to <host-ip>:6379.
 ```
 
-[back to top](#table-of-contents)
+([back to top](#table-of-contents))
 
