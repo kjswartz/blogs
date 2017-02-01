@@ -17,6 +17,8 @@ as well as other third-party repositories. `yum` is used in Red Hat Enterprise L
 
 - [Web Server](web_server)
 
+- [References](#references)
+
 # User Setup
 Depending on who setup your servers you may need to create or modify users. I will just quickly cover the basics of setting up a user here. You should have a root user when you initially setup your server. 
 The general structure we'll operate from for our web server is three user types: a root user, a user that can ssh into our server, and a deploy user in charge of running our app. 
@@ -50,4 +52,31 @@ $ passwd -l <user_name>
 
 [See Here for additional information and options](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/s1-users-tools.html)
 
+## References
+- [chkconfig](http://linuxcommand.org/man_pages/chkconfig8.html) 
 
+- [NGINX](https://www.nginx.com/resources/wiki/start/)
+
+- [NGINX Init Scripts](https://www.nginx.com/resources/wiki/start/topics/examples/redhatnginxinit/)
+
+- [netcat](https://en.wikipedia.org/wiki/Netcat) 
+
+- [Postgresql](https://www.postgresql.org/download/linux/redhat/)
+
+- [Postgres installation](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-centos-7)
+
+- [Postgres ALTER ROLER docs](https://www.postgresql.org/docs/9.0/static/sql-alterrole.html)
+
+- [Puma](https://github.com/puma/puma)
+
+- [RHEL](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux)
+
+- [RHEL User Setup](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/s1-users-tools.html)
+
+- [Redis](https://redis.io/topics/quickstart)
+
+- [RVM](https://rvm.io/)
+
+- [User Permissions](http://www.elated.com/articles/understanding-permissions/)
+
+- [yum](https://access.redhat.com/solutions/9934) 
