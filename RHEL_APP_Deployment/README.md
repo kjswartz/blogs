@@ -11,9 +11,11 @@ From RHEL: `yum` is the primary tool for getting, installing, deleting, querying
 as well as other third-party repositories. `yum` is used in Red Hat Enterprise Linux versions 5 and later. Versions of Red Hat Enterprise Linux 4 and earlier used `up2date`.
 
 ## Table of Contents
-- [Database Server](database_server_setup.md)
+- [User Setup](#user-setup)
 
-- [Web Server](web_server_setup.md)
+- [Database Server](database_server)
+
+- [Web Server](web_server)
 
 # User Setup
 Depending on who setup your servers you may need to create or modify users. I will just quickly cover the basics of setting up a user here. You should have a root user when you initially setup your server. 

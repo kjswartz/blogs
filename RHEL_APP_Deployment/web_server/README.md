@@ -1,4 +1,19 @@
-### Initial Directory Setup
+# Web Server
+## Table of Contents
+- [Directory Setup](#directory-setup)
+
+- [Environment Variables](#environment-variables)
+	- [bash_profile](#bash_profile)
+
+	- [bashrc](#bashrc)
+
+- [RVM](#rvm)
+
+- [Puma](#puma)
+
+- [NGINX](#nginx)
+
+## Directory Setup
 We need to setup our project directory and set the permissions. This will give ownership to our `deploy` user and group we setup and give the owner and group read-write and execute permission.
 All other users will have read and execute permission.
 ```
@@ -9,12 +24,12 @@ $ chmod 775 /opt/myproject
 
 [More on Permissions](http://www.elated.com/articles/understanding-permissions/)
 
-### Varible Configuration 
+## Environment Variables
 In order to utilize our environment variables in our app will need to setup our `.bashrc` and `.bash_profile`.
 The below snippets should be enough to get these files setup if they are not already. Remember to do this as your `deploy` user, so `sudo su - <deploy_user>` first!
 Also, be sure to `source` these files after modifying them in order for any changes to take immediate effect.
 
-#### .bash_profile
+### bash_profile
 ```
 # Get the aliases and functions
 if [ -f ~/.bashrc ]; then
@@ -27,7 +42,7 @@ export PATH
 source ~/.profile
 ```
 
-#### .bashrc
+### bashrc
 ```
 # Source global definitions
 if [ -f /etc/bashrc ]; then
@@ -39,13 +54,7 @@ export <KEY>=<VALUE>
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 ``` 
 
-
-### Webserver Tools
-- Puma
-- NGINX
-- RVM
-
-#### [RVM](https://rvm.io/)
+## [RVM](https://rvm.io/)
 I prefer using [RVM](https://rvm.io/rvm/install) for installing ruby so lets set that up. The following step will install `mpapis public key`.
 ```
 $ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
@@ -64,14 +73,14 @@ We also need to install bundler.
 $ gem install bundler
 ```
 
-#### [Puma](https://github.com/puma/puma)
+## [Puma](https://github.com/puma/puma)
 Puma will be the server responsible for running our app. We'll be using Capistrano for deploying our app 
 so our `puma.rb` configuration file will live in a shared folder. See [here](puma_example.rb) for an example configuration.
 ```
 $ mkdir /var/www/<project>/shared
 ```
 
-##### Server commands
+### Server commands
 To start puma in the background
 ```
 $ bundle exec pumactl -F /var/www/<project>/shared/puma.rb start &
@@ -94,10 +103,10 @@ pumactl -P /var/www/<project>/shared/tmp/pids/puma.pid restart'
 ```
 
 
-##### [Jungle Init](https://github.com/puma/puma/tree/master/tools/jungle/init.d)
+### [Jungle Init](https://github.com/puma/puma/tree/master/tools/jungle/init.d)
 
 
-#### [NGINX](https://www.nginx.com/resources/wiki/start/)
+## [NGINX](https://www.nginx.com/resources/wiki/start/)
 NGINX is a free, open-source, high-performance HTTP server and reverse proxy.
 ```
 $ yum install nginx
@@ -110,7 +119,7 @@ $ mkdir /etc/nginx/sites-enabled
 ```
 [project.conf](sites-enabled_example.conf) example can be found here.
 
-##### INIT Scripts
+### INIT Scripts
 We should configure NGINX to automatically start when the server does.
 Grab the `init.d` script from [here](https://www.nginx.com/resources/wiki/start/topics/examples/redhatnginxinit/) and save as `/etc/init.d/nginx`
 
@@ -133,7 +142,7 @@ Once the server becomes available login and check NGINX status
 $ service nginx status
 ``` 
 
-##### Server Commands
+### Server Commands
 NGINX commands are controlled with `service` from root user.
 
 Start:
