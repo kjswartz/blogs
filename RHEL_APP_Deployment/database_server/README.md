@@ -1,12 +1,23 @@
 # Database Server Setup
 ## Table of Contents
 - [Postgresql](#postgresql)
-	- [PG Installation](#pg-installation)
+	- [Installation](#pg-installation)
+
+	- [User and DB Setup](#user-and-database-creation)
+	
+	- [Testing Connectivity](#pg-connectivity)
+
 - [Redis](#redis)
+	- [Installation](#redis-installation)
 
-### [Postgresql](https://www.postgresql.org/download/linux/redhat/)
+	- [Commands](#redis-commands)
+	
+	- [Testing Connectivity](#redis-connectivity)
 
-#### PG Installation 
+
+## [Postgresql](https://www.postgresql.org/download/linux/redhat/)
+
+### PG Installation 
 To install `postgres` use the following command. Installing `postgresql-contrib` will give use access to some additional utilities such as `hstore`.
 ```
 $ sudo yum install postgresql-server postgresql-contrib
@@ -25,7 +36,10 @@ To make your database installation complete, you need to perform these two steps
 $ service postgresql initdb
 $ chkconfig postgresql on
 ```
-#### User and Database Creation
+
+[back to top](#table-of-contents)
+
+### User and Database Creation
 A user (`postgres`) is created by default during installation. The below command will log into user postgres. You're shell prompt should change to something like `-bash-4.2$` after connecting.
 ```
 $ sudo -i -u postgres
@@ -60,7 +74,9 @@ We'll want to allow the user we created earlier the ability to login:
 postgres=# ALTER ROLE <user> WITH LOGIN;
 ```
 
-#### Testing connection from our Web Server
+[back to top](#table-of-contents)
+
+### PG Connectivity
 Since we are using two different servers to host our web code and database, we'll need to make sure we can access our database from our `webserver`. 
 - NOTE: If you have a firewall setup you'll need to configure it to allow access from your webserver on port `5432`.  
 
@@ -72,15 +88,12 @@ $ psql -h <host-ip> -p <port> -U <user> -W <database_name>
 You will then be prompted for the user password and if successful you'll prompt should change to the `database_name=>`. 
 You can use `\l` to list databases, `\dt` to see a list of the tables in your database and `\q` to quit.
 
-Helpful guides
-- [Postgres installation](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-centos-7)
+[back to top](#table-of-contents)
 
-- [Postgres Docs](https://www.postgresql.org/docs/9.0/static/)
-
-### [Redis](https://redis.io/topics/quickstart)
+## [Redis](https://redis.io/topics/quickstart)
 Redis will be utilized as our caching solution. A client connects to a Redis server creating a TCP connection to the port 6379. 
 
-#### Installation 
+### Redis Installation 
 As `root` user or user with sudo privilages:
 ```
 $ sudo yum install redis
@@ -91,7 +104,9 @@ $ vim /etc/redis.conf
 ```
 Then you'll need to change the `bind 127.0.0.1` to `bind 0.0.0.0` in order to connect from outside server.
 
-#### Control Commands
+[back to top](#table-of-contents)
+
+### Redis Commands
 You can use the service command to start, stop, and check the status of redis.
 - Start
 ```
@@ -106,7 +121,9 @@ $ service redis stop
 $ service redis status
 ```
 
-#### Access 
+[back to top](#table-of-contents)
+
+### Redis Connectivity 
 You will need to be able to access your server on port 6379. You can check to see if it is configured the below command. Then check to see if port 6379 is listed. 
 If you are using a firewall you'll have to configure this setting. 
 ```
@@ -121,4 +138,6 @@ If you are successful you should see something similiar to below. Then you can j
 ```
 Ncat: Connected to <host-ip>:6379.
 ```
+
+[back to top](#table-of-contents)
 
