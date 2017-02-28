@@ -20,6 +20,17 @@
 
 	- [Commands](#nginx-commands)
 
+alias c=clear
+alias be="bundle exec"
+alias l="ls -l"
+alias la="ls -la"
+
+alias pel="vim /var/www/baycare-api/current/log/puma.error.log"
+alias pal="vim /var/www/baycare-api/current/log/puma.access.log"
+alias capi="cd /var/www/baycare-api/current"
+
+eval $(ssh-agent)
+
 ## Directory Setup
 We need to setup our project directory and set the permissions. This will give ownership to our `deploy` user and group we setup and give the owner and group read-write and execute permission.
 All other users will have read and execute permission.
@@ -107,7 +118,7 @@ $ bundle exec pumactl -F /var/www/<project>/shared/puma.rb start &
 
 To stop puma
 ```
-bundle exec pumactl -P /var/www/<project>/shared/tmp/pids/puma.pid restart'
+bundle exec pumactl -P /var/www/<project>/shared/tmp/pids/puma.pid stop'
 ```
 or
 ```
@@ -118,7 +129,7 @@ $ kill -s 15 32760
 
 To restart
 ```
-pumactl -P /var/www/<project>/shared/tmp/pids/puma.pid restart'
+$ bundle exec pumactl -P /var/www/<project>/shared/tmp/pids/puma.pid restart'
 ```
 
 ([back to top](#table-of-contents))
@@ -189,5 +200,13 @@ Stop:
 $ service nginx stop
 ```
 
+### NGINX Image hosting
+If you are going to be saving images then you need to ensure you have access to all the necessary directories. 
+Check to make sure you can access the following directory with the user you set up to run NGINX. If not switch to root
+and assign your NGINX user the owner. 
+
+```
+$ /var/lib/nginx/tmp/
+```
 ([back to top](#table-of-contents))
 
