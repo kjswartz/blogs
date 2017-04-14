@@ -34,7 +34,7 @@ $ yum install postgresql-9.2.15-1.el7_2.x86_64
 Due to policies for Red Hat family distributions, the PostgreSQL installation will not be enabled for automatic start or have the database initialized automatically. 
 To make your database installation complete, you need to perform these two steps:
 ```
-$ service postgresql initdb
+$ postgresql-setup initdb
 $ chkconfig postgresql on
 ```
 
@@ -104,6 +104,11 @@ Since we are setting up separate servers for our database of web files will need
 $ vim /etc/redis.conf
 ```
 Then you'll need to change the `bind 127.0.0.1` to `bind 0.0.0.0` in order to connect from outside server.
+
+Add redis to auto start
+```
+$ chkconfig redis on
+```
 
 ([back to top](#table-of-contents))
 
