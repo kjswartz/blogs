@@ -49,11 +49,11 @@ If you are prompted for a password, this will be your normal user password. You 
 We can then create a different user for our database. This will ask you the name of the role and whether they should be a superuser. 
 NOTE User needs to be a `SUPERUSER` in order to run schema migration if utilizing `hstore` extension. You can type `$ man createuser` to get the official documentation. 
 ```
-$ createuser --<user_name>
+$ createuser <user_name>
 ```
-Then you can set a password for the new user with:
+Then you can set a password for the new user by entering psql console `$ psql`:
 ```
-$ \password <user> <password>
+postgres=# ALTER USER <username> WItH OASSWORD '<password>';
 ```
 Create your database:
 ```

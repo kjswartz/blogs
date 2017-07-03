@@ -20,6 +20,8 @@
 
 	- [Commands](#nginx-commands)
 
+- [Cron Jobs](#cron-jobs)
+
 alias c=clear
 alias be="bundle exec"
 alias l="ls -l"
@@ -177,6 +179,20 @@ Once the server becomes available login and check NGINX status
 ```
 $ service nginx status
 ``` 
+Installing SSL Certs.
+```
+  ssl_certificate /etc/nginx/ssl/dev-healthnav.crt;
+  ssl_certificate_key /etc/nginx/ssl/dev-healthnav.key;
+```
+server {
+  listen 80;
+
+  listen 443 ssl;
+  server_name dev.healthnav.baycare.org;
+
+  ssl_certificate /etc/nginx/ssl/dev-healthnav.crt or pem;
+  ssl_certificate_key /etc/nginx/ssl/dev-healthnav.key;
+}
 
 ([back to top](#table-of-contents))
 
@@ -210,3 +226,18 @@ $ /var/lib/nginx/tmp/
 ```
 ([back to top](#table-of-contents))
 
+## [Cron Jobs](https://www.cyberciti.biz/faq/how-do-i-add-jobs-to-cron-under-linux-or-unix-oses/)
+If you have any rake tasks you need to schedule you'll need to set up a cron jobs. 
+To edit or create your own crontab file, type the following command at the UNIX / Linux shell prompt:
+```
+$ crontab -e
+```
+The syntax is below. 
+1 = minute (0-59), 2 = hour (0-23), 3 = day of month (1-31), 4 = month (1-12), 5 = day of week (0-7) (Sunday is 0 or 7)
+```
+1 2 3 4 5 /path/to/command arg1 arg 2
+OR
+0 0 * * * bash -l -c $HOME/run-cron.sh
+```
+The -l flag tells bash to act as if it had been invoked as a login shell and -c makes commands be read from a string. 
+If there are arguments after the string, they are assigned to the positional parameters, starting with $0.
